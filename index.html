@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+</head>
+
+<body>
+    <h1>Dang nhap</h1>
+    <input type="text" id="username" placeholder="username" /><br><br>
+    <input type="password" id="password" placeholder="password" /><br><br>
+    <button id="btn">Dang nhap</button>
+
+    <script>
+        sessionStorage.clear();
+        var api = 'http://localhost:8080/checkuser';
+        var username = document.getElementById('username');
+        var password = document.getElementById('password');
+        var btn = document.getElementById('btn');
+
+        btn.onclick = function() {
+            var account = {
+                username: username.value,
+                password: password.value
+            }
+            fetch(api, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(account)
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    if (json == null) {
+                        alert('sai tai khoan hoac mat khau');
+                        return;
+                    }
+                    sessionStorage.setItem("user", JSON.stringify(json));
+                    window.location.href = 'search.html';
+                })
+        }
+    </script>
+</body>
+
+</html>

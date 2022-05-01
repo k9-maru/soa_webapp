@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCH</title>
+</head>
+
+<body>
+    <h1>Tim kiem phong trong</h1>
+    <input type="text" value="2020/01/01" id="inDate" /><br><br>
+    <input type="text" value="2020/01/05" id="outDate" /><br><br>
+    <input type="text" value="large" id="type" /><br><br>
+    <input type="text" value="hà nội" id="local" /><br><br>
+    <button id="btnsearch">Tim kiem</button>
+
+    <ol id="rooms">
+        <li><button id="btnord" onclick="btnOrdActive(null)"></button></li>
+    </ol>
+
+    <script>
+        var jtem = null;
+        var api = 'http://localhost:8080/listfreeroom';
+        var inDate = document.getElementById('inDate');
+        var outDate = document.getElementById('outDate');
+        var type = document.getElementById('type');
+        var local = document.getElementById('local');
+        var btnsearch = document.getElementById('btnsearch');
+        var btnord = document.getElementById('btnord');
+
+        btnsearch.onclick = function() {
+            var i = inDate.value;
+            var o = outDate.value;
+            var t = type.value;
+            var l = local.value;
+
+            //in=2020/01/01&out=2020/01/05&type=large&local=hà nội
+            var rooms = document.getElementById('rooms');
+            fetch(api + `?in=${i}&out=${o}&type=${t}&local=${l}`)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    var htmls;
+                    // if (json.length === 0) {
+                    //     htmls = '<li><p>Khong co ket qua</p></li>';
+                    //     rooms.innerHTML = htmls.join();
+                    //     return;
+                    // }
+                    htmls = json.map(function(item) {
+                        jtem = JSON.stringify(item);
+                        return `
+                        <li>
+                        <p>name: ${item.name}</p>
+                        <p>price: ${item.price}</p>
+                        <p>type: ${item.type}</p>
+                        <p>hotel: ${item.hotel.name}</p>
+                        <button id = "btnord" onclick = "btnOrdActive(jtem)">Dat phong</button>
+                        </li>
+                        `;
+                    });
+                    rooms.innerHTML = htmls.join();
+                })
+        }
+
+        function btnOrdActive(item) {
+            if (item === null) return;
+            sessionStorage.setItem("room", item);
+            window.location.href = 'booking.html';
+        }
+    </script>
+</body>
+
+</html>
