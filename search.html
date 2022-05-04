@@ -21,6 +21,10 @@
     </ol>
 
     <script>
+        sessionStorage.removeItem('in');
+        sessionStorage.removeItem('out');
+        sessionStorage.removeItem('room');
+
         var jtem = null;
         var api = 'http://localhost:8080/listfreeroom';
         var inDate = document.getElementById('inDate');
@@ -35,6 +39,9 @@
             var o = outDate.value;
             var t = type.value;
             var l = local.value;
+
+            sessionStorage.setItem("in", i);
+            sessionStorage.setItem("out", o);
 
             //in=2020/01/01&out=2020/01/05&type=large&local=hà nội
             var rooms = document.getElementById('rooms');

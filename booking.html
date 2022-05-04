@@ -9,15 +9,67 @@
 </head>
 
 <body>
-    <button id="btn">test</button>
-    <script>
-        var btn = document.getElementById('btn');
-        btn.onclick = function() {
-            var user = sessionStorage.user;
-            var room = sessionStorage.room;
+    <h1>
+        User:
+    </h1>
+    <p id="user"></p>
 
-            console.log(user);
-            console.log(room);
+    <h1>
+        room:
+    </h1>
+    <p id="room"></p>
+
+    <input type="text" placeholder="client name:" id="clientName" />
+    <br><input type="text" placeholder="client phone:" id="clientPhone" />
+    <br><input type="text" placeholder="client id:" id="clientId" />
+    <br><button id="btnadd">Dat phong</button>
+
+    <script>
+        var api = 'http://localhost:8080/add';
+        var user = document.getElementById('user');
+        var room = document.getElementById('room');
+        var btnadd = document.getElementById('btnadd');
+        var clientName = document.getElementById('clientName');
+        var clientPhone = document.getElementById('clientPhone');
+        var clientId = document.getElementById('clientId');
+
+        var u = JSON.parse(sessionStorage.user);
+        var r = JSON.parse(sessionStorage.room);
+
+        console.log(r);
+
+        var html = `<p>${u.username}</p>`;
+        var html1 = `<p>Ten phong:${r.name},Loai: ${r.type},Gia: ${r.price}</p>`;
+
+        user.innerHTML = html;
+        room.innerHTML = html1;
+
+        btnadd.onclick = function() {
+            var b = {
+                "in": sessionStorage.in,
+                "out": sessionStorage.out,
+                "custumerName": clientName.value,
+                "custumerPhone": clientPhone.value,
+                "custumerId": clientId.value,
+                "room": r,
+                "user": {
+                    "id": u.id
+                }
+            };
+
+            fetch(api, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(b)
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(json) {
+                    console.log(json);
+                })
         }
     </script>
 </body>
