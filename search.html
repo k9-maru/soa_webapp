@@ -5,17 +5,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/search.css">
     <title>SEARCH</title>
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Tim kiem phong trong</h1>
-    <input type="text" value="2020/01/01" id="inDate" /><br><br>
-    <input type="text" value="2020/01/05" id="outDate" /><br><br>
-    <input type="text" value="large" id="type" /><br><br>
-    <input type="text" value="hà nội" id="local" /><br><br>
-    <button id="btnsearch">Tim kiem</button>
+    <div class="search">
+        <h1>Tìm kiếm phòng trống</h1>
+        <table>
 
+            <tr>
+                <th width="40%">Ngày đến:</th>
+                <th><input type="date" value="2020/01/01" id="inDate" /><br><br>
+                </th>
+            </tr>
+            <tr>
+                <th>Ngày đi:</th>
+                <th><input type="date" value="2020/01/05" id="outDate" /><br><br>
+                </th>
+            </tr>
+            <tr>
+                <th>Loại phòng:</th>
+                <th>
+                    <div class="select">
+                        <select id="type" name="type">
+                        <option value="small">Nhỏ</option>
+                        <option value="fit">Vừa</option>
+                        <option value="large">Rộng</option>
+                        <option value="verylarge">Rất rộng</option>
+                    </select>
+                    </div>
+                    <br><br>
+                </th>
+            </tr>
+            <tr>
+                <th>Địa điểm:</th>
+                <th><input type="text" value="hà nội" id="local" /><br><br>
+                </th>
+            </tr>
+        </table>
+        <button id="btnsearch">Tìm kiếm</button>
+
+    </div>
     <ol id="rooms">
         <li><button id="btnord" onclick="btnOrdActive(null)"></button></li>
     </ol>

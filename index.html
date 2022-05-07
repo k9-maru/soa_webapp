@@ -6,13 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Dang nhap</h1>
-    <input type="text" id="username" placeholder="username" /><br><br>
-    <input type="password" id="password" placeholder="password" /><br><br>
-    <button id="btn">Dang nhap</button>
+    <div class="login">
+        <h1>Đăng nhập</h1>
+        <input type="text" id="username" placeholder="Tên đăng nhập" /><br><br>
+        <input type="password" id="password" placeholder="Mật khẩu" /><br><br>
+        <button id="btn">Đăng nhập</button>
+    </div>
 
     <script>
         sessionStorage.clear();

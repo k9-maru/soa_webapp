@@ -5,24 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/booking.css">
     <title>BOOKING</title>
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+        }
+    </style>
 </head>
 
 <body>
-    <h1>
-        User:
-    </h1>
+    <h1>Người đặt:</h1>
     <p id="user"></p>
-
-    <h1>
-        room:
-    </h1>
+    <h1>Phòng:</h1>
     <p id="room"></p>
-
-    <input type="text" placeholder="client name:" id="clientName" />
-    <br><input type="text" placeholder="client phone:" id="clientPhone" />
-    <br><input type="text" placeholder="client id:" id="clientId" />
-    <br><button id="btnadd">Dat phong</button>
+    <div class="booking">
+        <input type="text" placeholder="Tên khách hàng:" id="clientName" />
+        <br><input type="text" placeholder="Số điện thoại:" id="clientPhone" />
+        <br><input type="text" placeholder="ID khách hàng:" id="clientId" />
+        <br><button id="btnadd">Đặt phòng</button>
+    </div>
 
     <script>
         var api = 'http://localhost:8080/add';
