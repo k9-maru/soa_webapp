@@ -3,10 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet"
+        type="text/css"
+        href="css/login.css">
     <style>
         body {
             background-image: url("https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
@@ -17,34 +21,69 @@
 <body>
     <div class="login">
         <h1>Đăng nhập</h1>
-        <input type="text" id="username" placeholder="Tên đăng nhập" /><br><br>
-        <input type="password" id="password" placeholder="Mật khẩu" /><br><br>
-        <button id="btn">Đăng nhập</button>
+        <input type="text"
+            id="username"
+            placeholder="Tên đăng nhập" /><br><br>
+        <input type="password"
+            id="password"
+            placeholder="Mật khẩu" /><br><br>
+        <button id="btn">Đăng nhập</button><br><br>
+        <div class="one-btn-container google"
+            data-ng-show="vm.continueWith3rdParty == 'GG'">
+            <button class="one-primary one-button"
+                id="googleSignInButton"
+                onclick="googleSignIn()"
+                type="button">Đăng nhập bằng Google</button>
+        </div>
     </div>
 
-    <script>
+    <script type="module">
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            signInWithRedirect,
+            signInWithPopup
+        } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5y625nRn9BpeH2PLZUgKhYfkdcjVJDz8",
+            authDomain: "soa-auth-ab489.firebaseapp.com",
+            projectId: "soa-auth-ab489",
+            storageBucket: "soa-auth-ab489.appspot.com",
+            messagingSenderId: "302465004763",
+            appId: "1:302465004763:web:1cf15ea10ac16858f048fe"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider(app);
+
         sessionStorage.clear();
         var api = 'http://localhost:8080/checkuser';
         var username = document.getElementById('username');
         var password = document.getElementById('password');
         var btn = document.getElementById('btn');
 
-        btn.onclick = function() {
+        btn.onclick = function () {
             var account = {
                 username: username.value,
                 password: password.value
             }
             fetch(api, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(account)
-                })
-                .then(function(response) {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(account)
+            })
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(json) {
+                .then(function (json) {
                     if (json == null) {
                         alert('sai tai khoan hoac mat khau');
                         return;
@@ -53,6 +92,23 @@
                     window.location.href = 'search.html';
                 })
         }
+
+        var userEmail;
+        const btnlggoole = document.getElementById("googleSignInButton");
+        btnlggoole.onclick =
+            function googleSignIn() {
+                signInWithPopup(auth, provider)
+                    .then((rs) => {
+                        const credential = GoogleAuthProvider.credentialFromResult(rs);
+                        const token = credential.accessToken;
+                        const user = rs.user;
+                        console.log(user.email)
+                        userEmail = user.email;
+                    })
+                    .catch(() => {
+                        console.log("loi");
+                    })
+            }
     </script>
 </body>
 
