@@ -94,6 +94,7 @@
         }
 
         var userEmail;
+        var api = 'http://localhost:8080/getUser?email=';
         const btnlggoole = document.getElementById("googleSignInButton");
         btnlggoole.onclick =
             function googleSignIn() {
@@ -102,13 +103,31 @@
                         const credential = GoogleAuthProvider.credentialFromResult(rs);
                         const token = credential.accessToken;
                         const user = rs.user;
-                        console.log(user.email)
+                        console.log(user.email);
                         userEmail = user.email;
+                        signIn(userEmail);
                     })
-                    .catch(() => {
-                        console.log("loi");
+                    .catch((error) => {
+                        console.log(error);
                     })
             }
+        function signIn(userEmail) {
+            fetch(api + `${userEmail}`, {
+                method: 'GET'
+            })
+                .then(function (response) {
+                    return response.json();
+                }).then(function (json) {
+                    if (json == null) {
+                        alert('sai Email');
+                        return;
+                    }
+                    sessionStorage.setItem("user", JSON.stringify(json));
+                    window.location.href = 'search.html';
+                })
+        }
+
+
     </script>
 </body>
 

@@ -3,9 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/booking.css">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        type="text/css"
+        href="css/booking.css">
     <title>BOOKING</title>
     <style>
         body {
@@ -20,9 +24,15 @@
     <h1>Phòng:</h1>
     <p id="room"></p>
     <div class="booking">
-        <input type="text" placeholder="Tên khách hàng:" id="clientName" />
-        <br><input type="text" placeholder="Số điện thoại:" id="clientPhone" />
-        <br><input type="text" placeholder="ID khách hàng:" id="clientId" />
+        <input type="text"
+            placeholder="Tên khách hàng:"
+            id="clientName" />
+        <br><input type="text"
+            placeholder="Số điện thoại:"
+            id="clientPhone" />
+        <br><input type="text"
+            placeholder="ID khách hàng:"
+            id="clientId" />
         <br><button id="btnadd">Đặt phòng</button>
     </div>
 
@@ -46,7 +56,7 @@
         user.innerHTML = html;
         room.innerHTML = html1;
 
-        btnadd.onclick = function() {
+        btnadd.onclick = function () {
             var b = {
                 "in": sessionStorage.in,
                 "out": sessionStorage.out,
@@ -60,17 +70,20 @@
             };
 
             fetch(api, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(b)
-                })
-                .then(function(response) {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(b)
+            })
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(json) {
-                    console.log(json);
+                .then(function (json) {
+                    if (json === true) {
+                        confirm('Dat phong thanh cong');
+                        window.location.href = 'search.html';
+                    } else alert('Dat phong that bai');
                 })
         }
     </script>
