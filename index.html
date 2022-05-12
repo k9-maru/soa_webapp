@@ -28,13 +28,12 @@
             id="password"
             placeholder="Mật khẩu" /><br><br>
         <button id="btn">Đăng nhập</button><br><br>
-        <div class="one-btn-container google"
-            data-ng-show="vm.continueWith3rdParty == 'GG'">
+        <a href="firebase.html">
             <button class="one-primary one-button"
                 id="googleSignInButton"
-                onclick="googleSignIn()"
-                type="button">Đăng nhập bằng Google</button>
-        </div>
+                onclick=""
+                type="button">Đăng nhập bằng Google</button></a>
+    </div>
     </div>
 
     <script type="module">
@@ -93,39 +92,31 @@
                 })
         }
 
-        var userEmail;
-        var api = 'http://localhost:8080/getUser?email=';
-        const btnlggoole = document.getElementById("googleSignInButton");
-        btnlggoole.onclick =
-            function googleSignIn() {
-                signInWithPopup(auth, provider)
-                    .then((rs) => {
-                        const credential = GoogleAuthProvider.credentialFromResult(rs);
-                        const token = credential.accessToken;
-                        const user = rs.user;
-                        console.log(user.email);
-                        userEmail = user.email;
-                        signIn(userEmail);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
-            }
-        function signIn(userEmail) {
-            fetch(api + `${userEmail}`, {
-                method: 'GET'
-            })
-                .then(function (response) {
-                    return response.json();
-                }).then(function (json) {
-                    if (json == null) {
-                        alert('sai Email');
-                        return;
-                    }
-                    sessionStorage.setItem("user", JSON.stringify(json));
-                    window.location.href = 'search.html';
-                })
-        }
+        // var api = 'http://localhost:8080/getUser?email=';
+        // const btnlggoole = document.getElementById("googleSignInButton");
+        // btnlggoole.onclick =
+        //     function googleSignIn() {
+        //         signInWithPopup(auth, provider)
+        //             .then((rs) => {
+        //                 const credential = GoogleAuthProvider.credentialFromResult(rs);
+        //                 const token = credential.accessToken;
+        //                 const user = rs.user;
+        //                 signIn(user.email);
+        //             })
+        //             .catch((error) => {
+        //                 console.log(error);
+        //             })
+        //     }
+        // function signIn(userEmail) {
+        //     fetch(api + userEmail)
+        //         .then(function (response) {
+        //             return response.json();
+        //         }).then(function (json) {
+        //             confirm(json.username);
+        //             sessionStorage.setItem("user", JSON.stringify(json));
+        //             window.location.href = 'search.html';
+        //         })
+        // }
 
 
     </script>
