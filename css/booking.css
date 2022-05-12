@@ -1,6 +1,7 @@
 body {
     margin-top: 20px;
     font-family: sans-serif;
+    margin: 20 auto;
 }
 
 .booking {
@@ -14,8 +15,17 @@ body {
 }
 
 h1 {
-    display: inline-block;
-    color: #000000;
+    color: #fa003a;
+    text-align: center;
+    font-size: 40px;
+    border: 0px solid purple;
+}
+p{
+    color: #fa003a;
+    text-align: center;
+    font-size: 30px;
+    border: 0px solid purple;
+
 }
 
 .booking input {
@@ -36,4 +46,7 @@ h1 {
     background-color: #167bff;
     color: white;
     margin-top: 20px;
+}
+.booking button:hover{
+    font-size: 15px;
 }

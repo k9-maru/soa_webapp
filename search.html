@@ -35,9 +35,9 @@
                     <div class="select">
                         <select id="type" name="type">
                         <option value="small">Nhỏ</option>
-                        <option value="fit">Vừa</option>
+                        <option value="medium">Vừa</option>
                         <option value="large">Rộng</option>
-                        <option value="verylarge">Rất rộng</option>
+                        <option value="vip">Vip</option>
                     </select>
                     </div>
                     <br><br>
@@ -95,12 +95,22 @@
                     htmls = json.map(function(item) {
                         jtem = JSON.stringify(item);
                         return `
-                        <li>
-                        <p>name: ${item.name}</p>
-                        <p>price: ${item.price}</p>
-                        <p>type: ${item.type}</p>
-                        <p>hotel: ${item.hotel.name}</p>
-                        <button id = "btnord" onclick = "btnOrdActive(jtem)">Dat phong</button>
+                        <li>  
+                            <div class="searchresult">
+                            <table> 
+                            <tr>
+                            <td><p>Tên: ${item.name}</p></td>
+                            <td><p>Giá: ${item.price}</p></td>
+                            <td><p>Loại: ${item.type}</p></td>
+                            <td><p>Khách sạn: ${item.hotel.name}</p></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <button id = "btnord" onclick = "btnOrdActive(jtem)">Dat phong</button>
+                                </td>
+                            </tr>
+                            </table>
+                        </div>
                         </li>
                         `;
                     });
