@@ -23,6 +23,8 @@
     <p id="user"></p>
     <h1>Phòng:</h1>
     <p id="room"></p>
+    <h1>Trạng thái:</h1>
+    <p id="status">San sang</p>
     <div class="booking">
         <input type="text"
             placeholder="Tên khách hàng:"
@@ -55,6 +57,7 @@
         room.innerHTML = html1;
 
         btnadd.onclick = function () {
+            document.getElementById('status').innerHTML = `Dang dat phong`;
             var b = {
                 "in": sessionStorage.in,
                 "out": sessionStorage.out,
@@ -79,9 +82,15 @@
                 })
                 .then(function (json) {
                     if (json === true) {
-                        confirm('Dat phong thanh cong');
-                        window.location.href = 'search.html';
-                    } else alert('Dat phong that bai');
+                        document.getElementById('status').innerHTML = `Dat phong thanh cong`;
+                        confirm('Dat phong thanh cong')
+                        setTimeout(function () {
+                            window.location.href = 'search.html';
+                        }, 3000);
+                    } else {
+                        document.getElementById('status').innerHTML = `Dat phong that bai`;
+                        status.innerHTML = `Dat phong that bai`;
+                    }
                 })
         }
     </script>
