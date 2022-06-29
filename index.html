@@ -36,31 +36,7 @@
     </div>
     </div>
 
-    <script type="module">
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
-        import {
-            getAuth,
-            GoogleAuthProvider,
-            signInWithRedirect,
-            signInWithPopup
-        } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyB5y625nRn9BpeH2PLZUgKhYfkdcjVJDz8",
-            authDomain: "soa-auth-ab489.firebaseapp.com",
-            projectId: "soa-auth-ab489",
-            storageBucket: "soa-auth-ab489.appspot.com",
-            messagingSenderId: "302465004763",
-            appId: "1:302465004763:web:1cf15ea10ac16858f048fe"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider(app);
-
+    <script>
         sessionStorage.clear();
         var api = 'http://localhost:8080/checkuser';
         var username = document.getElementById('username');
@@ -83,41 +59,14 @@
                     return response.json();
                 })
                 .then(function (json) {
-                    if (json == null) {
-                        alert('sai tai khoan hoac mat khau');
-                        return;
-                    }
                     sessionStorage.setItem("user", JSON.stringify(json));
                     window.location.href = 'search.html';
                 })
+                .catch(function (ex) {
+                    console.log("ex: " + ex);
+                    alert('Sai tai khoan hoac mat khau');
+                })
         }
-
-        // var api = 'http://localhost:8080/getUser?email=';
-        // const btnlggoole = document.getElementById("googleSignInButton");
-        // btnlggoole.onclick =
-        //     function googleSignIn() {
-        //         signInWithPopup(auth, provider)
-        //             .then((rs) => {
-        //                 const credential = GoogleAuthProvider.credentialFromResult(rs);
-        //                 const token = credential.accessToken;
-        //                 const user = rs.user;
-        //                 signIn(user.email);
-        //             })
-        //             .catch((error) => {
-        //                 console.log(error);
-        //             })
-        //     }
-        // function signIn(userEmail) {
-        //     fetch(api + userEmail)
-        //         .then(function (response) {
-        //             return response.json();
-        //         }).then(function (json) {
-        //             confirm(json.username);
-        //             sessionStorage.setItem("user", JSON.stringify(json));
-        //             window.location.href = 'search.html';
-        //         })
-        // }
-
 
     </script>
 </body>

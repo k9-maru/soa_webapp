@@ -99,14 +99,17 @@
                 })
                 .then(function (json) {
                     var htmls;
-                    // if (json.length === 0) {
-                    //     htmls = '<li><p>Khong co ket qua</p></li>';
-                    //     rooms.innerHTML = htmls.join();
-                    //     return;
-                    // }
-                    htmls = json.map(function (item) {
-                        jtem = JSON.stringify(item);
-                        return `
+                    if (json.length === 0) {
+                        htmls = [`<li>
+                            <div class="searchresult">
+                            <p>NULL</p>
+                            </div>
+                            </li>`];
+                    }
+                    else {
+                        htmls = json.map(function (item) {
+                            jtem = JSON.stringify(item);
+                            return `
                         <li>  
                             <div class="searchresult">
                             <table> 
@@ -125,7 +128,8 @@
                         </div>
                         </li>
                         `;
-                    });
+                        });
+                    }
                     rooms.innerHTML = htmls.join();
                 })
         }
@@ -133,7 +137,6 @@
         function btnOrdActive(item) {
             if (item === null) return;
             sessionStorage.setItem("room", item);
-            confirm(sessionStorage.user);
             window.location.href = 'booking.html';
         }
     </script>
